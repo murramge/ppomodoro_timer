@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import PomodoroFocus from "./pomodoroFocus.jsx";
+import PomodoroBasic from "./pomodoroBasic.jsx";
 function Pomodoro(props) {
-  const [timer, setTimer] = useState();
+  const [selecttime, setselecttime] = useState();
 
-  [timer].every(() => {
-    return timer;
-  });
-
-  const ontime = (data) => {
-    [data].every(() => {
-      return data;
-    });
+  const onTime = (time) => {
+    setselecttime(time);
   };
-  return <PomodoroFocus ontime={ontime} />;
+
+  const time = parseInt(selecttime);
+
+  const hasInput = [time].every((item) => item);
+
+  return (
+    <>
+      <PomodoroBasic onTime={onTime} />
+      <> {hasInput && <PomodoroFocus onTime={time}></PomodoroFocus>} </>
+    </>
+  );
 }
 
 export default Pomodoro;

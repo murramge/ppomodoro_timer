@@ -6,31 +6,26 @@ function padNumber(num, length) {
 }
 
 function PomodoroFocus(props) {
+  const { onTime } = props;
+
+  console.log(onTime);
+  const temphour = padNumber(0, 2);
+  const tempmin = padNumber(0, 2);
+  const tempsec = padNumber(0, 2);
   //초기 설정은 일단 0으로
-  const hourinit = 0;
-  const mininit = 0;
-  const secinit = 0;
+  const temptime = onTime ? parseInt(onTime) : 0;
 
-  const [timer, setTimer] = useState();
-
-  const time = parseInt(timer);
-
-  [time].every(() => {
-    return time;
-  });
-
-  console.log(time);
-
+  console.log(temptime);
   //지정할 시간 선택
-  let initialTime = useRef(time);
+  let initialTime = useRef(temptime);
   // interval을 중지하고 0으로 초기화하고 싶을 때
   const interval = useRef(null);
 
   console.log(initialTime);
 
-  const [hour, setHour] = useState(padNumber(hourinit, 2));
-  const [min, setMin] = useState(padNumber(mininit, 2));
-  const [sec, setSec] = useState(padNumber(secinit, 2));
+  const [hour, setHour] = useState(padNumber(temphour, 2));
+  const [min, setMin] = useState(padNumber(tempmin, 2));
+  const [sec, setSec] = useState(padNumber(tempsec, 2));
 
   useEffect(() => {
     interval.current = setInterval(() => {
@@ -48,13 +43,9 @@ function PomodoroFocus(props) {
     }
   }, [sec]);
 
-  const twofive = () => {
-    setTimer(1500);
-  };
   return (
     <div>
       {hour} : {min} : {sec}
-      <button onClick={twofive}>25</button>
     </div>
   );
 }
